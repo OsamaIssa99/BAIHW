@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>A Star</title>
+    </head>
+    <style>
+        body {
+            background-color: #2bb586;
+        }
+
+        form {
+            background-color: #eee;
+            width: 70%;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        div.step {
+            background-color: #ccc;
+            width: 80%;
+            margin: 10px auto;
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        spam.scd {
+            color: #b52b2b;
+        }
+
+        div.contain {
+            text-align: center;
+        }
+
+        div.start {
+            display: inline-block;
+            background-color: #ccc;
+            width: 35%;
+            margin: 1% 5px;
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+            text-align: left;
+        }
+
+        div.end {
+            display: inline-block;
+            background-color: #ccc;
+            width: 35%;
+            margin: 1% 5px;
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+            text-align: left;
+        }
+
+        select {
+            width: 200px;
+            margin-left: 20px;
+            padding: 10px 10px;
+            border-radius: 7px;
+        }
+
+        label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        div.btn {
+            width: 90%;
+            margin: 10px 20px 0px;
+            text-align: center;
+        }
+
+        input.submit {
+            background-color: #ddd;
+            width: 200px;
+            height: 50px;
+            border: 1px solid #aaa;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+            color: #2bb586;
+        }
+    </style>
+    <script>
+        function calculate() {
+            ddl_city1 = document.getElementById('start-city').value;
+            ddl_city2 = document.getElementById('end-city').value;
+            if (ddl_city1 == ddl_city2)
+                alert("Start-city and End-city cannot be the same!!!")
+            else
+                {
+                    u = "{% url 'result' %}" + "?ddl_city1=" + ddl_city1 + "&ddl_city2=" + ddl_city2;
+                    window.location.href = u;
+                }
+        }
+    </script>
+    <body>
+        <form>
+            <div class="step"><spam class="scd">Second-Step :</spam> Choose the Start-city and the End-City.</div>
+            <div class="contain">
+                <div class="start">
+                    <label for="start-city">Start-City :</label>
+                    {% block content %}
+                    <select id="start-city">
+                        {% for ddl_cities in cities %}
+                            {% if ddl_cities != "" %}
+                                <option value="{{ddl_cities}}">{{ddl_cities}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="end">
+                    <label for="end-city">End-City :</label>
+                    <select id="end-city">
+                        {% for ddl_cities in cities %}
+                            {% if ddl_cities != "" %}
+                                <option value="{{ddl_cities}}">{{ddl_cities}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% endblock %}
+                </div>
+            </div>
+            <div class="btn">
+                <input type="button" onclick="calculate()" value="Calculate" class="submit" />
+            </div>
+        </form>
+    </body>
+</html>

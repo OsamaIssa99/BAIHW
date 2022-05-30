@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>A-Star</title>
+    </head>
+    <style>
+        body {
+            background-color: #2bb586;
+        }
+
+        form {
+            background-color: #eee;
+            width: 70%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        div.welcome {
+            background-color: #ccc;
+            width: 80%;
+            margin: 10px auto 10px auto;
+            padding: 30px;
+            border-radius: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: xx-large;
+            color: darkgreen;
+            text-align: center;
+        }
+
+        div.intro {
+            background-color: #ccc;
+            width: 80%;
+            margin: 0px auto 0px auto;
+            padding: 30px;
+            border-radius: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: x-large;
+            color: darkgreen;
+            text-align: center;
+        }
+
+        div.start {
+            background-color: #ccc;
+            width: 80%;
+            margin: 0px auto 10px auto;
+            padding: 30px;
+            border-radius: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: x-large;
+            color: #d92727;
+        }
+
+        div.step {
+            background-color: #ccc;
+            width: 80%;
+            margin: 10px auto;
+            padding: 30px;
+            border-radius: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        spam.fst {
+            color: #b52b2b;
+        }
+
+        div.sel {
+            background-color: #ccc;
+            width: 80%;
+            margin: 10px auto;
+            padding: 30px;
+            border-radius: 30px;
+        }
+        select {
+            width: 300px;
+            margin-left: 30px;
+            padding: 10px 20px;
+            border-radius: 7px;
+        }
+
+        label {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        div.btn {
+            width: 90%;
+            margin: 10px 20px 0px;
+            text-align: center;
+        }
+
+        input.submit {
+            background-color: #ddd;
+            width: 200px;
+            height: 50px;
+            border: 1px solid #aaa;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+            color: #2bb586;
+        }
+    </style>
+    <script>
+        function gonext() {
+            ddl_country = document.getElementById('countries').value;
+            u = "{% url 'cities' %}" + "?ddl_country="+ddl_country;
+            window.location.href = u;
+        }
+    </script>
+    <body>
+        <form>
+            <div class="welcome"><big> WELCOME!! </big></div>
+            <div class="intro"> This is a Web Application for A-Star Algorithm </div>
+            <div class="start">To get the shortest path between two cities in the same country please follow the instructions step by step.</div>
+            <div class="step"><spam class="fst">First-Step :</spam> You need to select a country.</div>
+            <div class="sel">
+                <label for="countries">Select a Country :</label>
+                {% block content %}
+                <select id="countries">
+                    {{ddl_countries | safe}}
+                    {% for ddl_countries in countries %}
+                        {% if ddl_countries != "" %}
+                        <option value="{{ddl_countries}}">{{ddl_countries}}</option>
+                        {% endif %}
+
+                        
+                    {% endfor %}
+                </select>
+                {% endblock %}
+            </div>
+            <div class="btn">
+                <input type="button" onclick="gonext()" value="Next   >>>" class="submit" />
+            </div>
+        </form>
+    </body>
+</html>

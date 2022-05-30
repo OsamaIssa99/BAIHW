@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>A-Star</title>
+    </head>
+    <style>
+        body {
+            background-color: #2bb586;
+        }
+
+        form {
+            background-color: #eee;
+            width: 70%;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        div.step {
+            background-color: #ccc;
+            width: 80%;
+            margin: 10px auto;
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+            color: #b52b2b;
+        }
+
+        div.contain {
+            background-color: #ccc;
+            width: 80%;
+            margin: 10px auto;
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        div.url {
+            width: 80%;
+            margin: 20px auto 10px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        div.stu {
+            background-color: #ccc;
+            width: 80%;
+            height: 60px;
+            margin: 10px auto;
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            position: relative;
+        }
+
+        div.head {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        div.info {
+            position: absolute;
+            top: 50px;
+            left: 150px;
+        }
+
+        div.subj {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+    
+    <body>
+        <form>
+            <div class="step"><big> Finally </big>The Shortest path with A-Star Algorithm.</div>
+            {% block content %}
+            <div class="contain">
+                <p id="show">Start  </p><span>&#8595;</span>
+                    {% for path in l_path %}
+                        {% if path == ''%}
+                            <p id="show">{{path}}  </p>
+                        {% else %}
+                            <p id="show">{{path}}  </p><span>&#8595;</span>
+                        {% endif %}
+                    {% endfor %}
+                    <p id="show">End  </p>
+            </div>
+            {% endblock %}
+            <div class="stu">
+                <div class="head"> Our Team :</div>
+                <div class="info"> / osama_170615 / &nbsp; - &nbsp; / yazan_171116 / &nbsp; - &nbsp; / ali_171096 / &nbsp; - &nbsp; / noura_180372 / </div>
+                <div class="subj"> HW - BAI501 </div>
+            </div>
+            <div class="url">
+                <a href="{% url 'home' %}"> Have Another Go  </a>
+            </div>
+        </form>
+    </body>
+</html>
